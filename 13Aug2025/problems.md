@@ -23,3 +23,8 @@ Write a function to calculate the nth fibonacci series in the most optimal way.
 
 ### Ques 8:
 Write all the sorting functions such that they can sort all and every type of array.
+
+### Ques 9:
+Write functions to add, subtract, and multiply two square matrices of NxN. You have to store the matrices in the most optimal way possible as the majority elements would be zero. 
+1. The main and two secondary diagonals (above and below it) of the matrix will be having values, others will be zero.
+2. The main and two secondary diagonals, as well as the 3 diagonals from the other side will be having values, other elements would be zero.
