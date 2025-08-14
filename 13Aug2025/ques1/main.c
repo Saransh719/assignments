@@ -1,3 +1,9 @@
+/*
+TIME COMPLEXITY ANALYSIS:
+
+SPACE COMPLEXITY ANALYSIS:
+*/
+
 #include <stdio.h>
 #include <math.h>
 
@@ -17,9 +23,11 @@ double calculate_power_double(double base, double exponent) {
     return exp(exponent * log(base));
 }
 
-// This function is better suited for integer calculations, using a more efficient method.
-// This only works for non-negative integer exponents.
-// This only works for small integer bases and exponents, as it does not handle large values that could overflow.
+/*
+- This function is better suited for integer calculations, using a more efficient method.
+- This only works for non-negative integer exponents.
+- This only works for small integer bases and exponents, as it does not handle large values that could overflow.
+*/
 int calculate_power_int(int base, int exponent) {
     printf("Calculating power for integers: %d^%d\n", base, exponent);
     
