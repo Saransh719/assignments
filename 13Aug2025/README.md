@@ -26,5 +26,5 @@ Solve given n eqations with any number of unknown variable using matrices. Also 
 ### Ques8-SP:
 Write a function to calculate the nth fibonacci series in the most optimal way.
 
-### Ques9-A:
+### [Ques9-A](./ques9-A/):
 Create a power function in C. It should be able to calculate the power of int raised to int, int raised to float, and float raised to int, and float raised to float
