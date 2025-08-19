@@ -1,19 +1,19 @@
 /*
-Algorithm: Bubble Sort
+Algorithm: Generic Bubble Sort
 
 1. Start from the first element of the array.
-2. Compare the current element with the next element.
-3. If the current element is greater than the next, swap them.
+2. Compare the current element with the next element using a comparison function.
+3. If the comparison function indicates the elements are in wrong order, swap them.
 4. Repeat steps 2-3 for all elements, reducing the range by one each time (since the largest element "bubbles" to the end).
 5. Repeat the process for n-1 passes or until no swaps are needed.
 
-pusedo code:
-procedure BubbleSort(A[1..n]) 
+Pseudo Code:
+procedure GenericBubbleSort(A[1..n], elementSize, compareFunction) 
     for i ← 1 to n-1 do
         swapped ← false
         for j ← 1 to n-i do
-            if A[j] > A[j+1] then
-                swap A[j] and A[j+1]
+            if compareFunction(A[j], A[j+1]) > 0 then
+                swap A[j] and A[j+1] using elementSize
                 swapped ← true
             end if
         end for
@@ -29,51 +29,80 @@ Time Complexity:
 - Worst Case: O(n^2)
 
 Space Complexity:
-- O(1) (in-place sorting)
+- O(1) (in-place sorting, only uses temporary variable for swapping)
 */
-
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-// Function to perform bubble sort
-void bubbleSort(int arr[], int n) {
-    int i, j, temp;
+// Generic bubble sort function
+void bubbleSort(void *arr, int n, size_t elementSize, 
+                int (*compare)(const void *a, const void *b)) {
+    char *base = (char *)arr;
+    void *temp = malloc(elementSize);
     int swapped;
-    for (i = 0; i < n - 1; i++) {
-        swapped = 0; // Flag to check if any swapping happened
-        // Last i elements are already in place
-        for (j = 0; j < n - i - 1; j++) {
-            // Compare adjacent elements
-            if (arr[j] > arr[j + 1]) {
-                // Swap if elements are in wrong order
-                temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
+    
+    for (int i = 0; i < n - 1; i++) {
+        swapped = 0;
+        for (int j = 0; j < n - i - 1; j++) {
+            void *elem1 = base + j * elementSize;
+            void *elem2 = base + (j + 1) * elementSize;
+            
+            if (compare(elem1, elem2) > 0) {
+                memcpy(temp, elem1, elementSize);
+                memcpy(elem1, elem2, elementSize);
+                memcpy(elem2, temp, elementSize);
                 swapped = 1;
             }
         }
-        // If no two elements were swapped, array is sorted
         if (swapped == 0)
             break;
     }
+    free(temp);
 }
 
-// Function to print the array
-void printArray(int arr[], int n) {
-    int i;
-    for (i = 0; i < n; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
+// Comparison functions for different data types
+int compareInt(const void *a, const void *b) {
+    int ia = *(const int*)a;
+    int ib = *(const int*)b;
+    return (ia > ib) - (ia < ib);
 }
 
-int main() {
-    int arr[] = {64, 34, 25, 12, 22, 11, 90};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    printf("Original array: ");
-    printArray(arr, n);
+int compareFloat(const void *a, const void *b) {
+    float fa = *(const float*)a;
+    float fb = *(const float*)b;
+    return (fa > fb) - (fa < fb);
+}
 
-    bubbleSort(arr, n);
+int compareChar(const void *a, const void *b) {
+    char ca = *(const char*)a;
+    char cb = *(const char*)b;
+    return (ca > cb) - (ca < cb);
+}
 
-    printf("Sorted array: ");
-    printArray(arr, n);
-    return 0;
+int compareString(const void *a, const void *b) {
+    return strcmp(*(const char**)a, *(const char**)b);
+}
+
+// Example usage
+void main() {
+    // Example with integers
+    int intArr[] = {64, 34, 25, 12, 22, 11, 90};
+    int intSize = sizeof(intArr) / sizeof(intArr[0]);
+    bubbleSort(intArr, intSize, sizeof(int), compareInt);
+    
+    // Example with floats
+    float floatArr[] = {3.14f, 2.71f, 1.41f, 1.73f};
+    int floatArraySize = sizeof(floatArr) / sizeof(floatArr[0]);
+    bubbleSort(floatArr, floatArraySize, sizeof(float), compareFloat);
+    
+    // Example with characters
+    char charArr[] = {'z', 'b', 'x', 'a', 'm'};
+    int charArraySize = sizeof(charArr) / sizeof(charArr[0]);
+    bubbleSort(charArr, charArraySize, sizeof(char), compareChar);
+    
+    // Example with strings
+    char *stringArr[] = {"banana", "apple", "orange", "grape"};
+    int stringArraySize = sizeof(stringArr) / sizeof(stringArr[0]);
+    bubbleSort(stringArr, stringArraySize, sizeof(char*), compareString);
 }
