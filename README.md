@@ -13,7 +13,7 @@ Welcome to the assignment repository! This guide will help you understand the st
 ## Naming Conventions
 
 - **A**: Stands for "Assignment question". These are the main questions to be completed for the assignment.
-- **SP**: Stands for "Side Piece". These are not urgent, but the PC (Program Coordinator) might ask for them randomly. Complete them if you have extra time.
+- **SP**: Stands for "Side Piece". These are not urgent, but the PC (Pravin Chandra) might ask for them randomly. Complete them if you have extra time.
 
 ## Tips for Navigation
 
