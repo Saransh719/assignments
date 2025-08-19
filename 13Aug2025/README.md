@@ -8,7 +8,7 @@ Write functions to add, subtract, and multiply two square matrices of NxN. You h
 1. The main and two secondary diagonals (above and below it) of the matrix will be having values, others will be zero.
 2. The main and two secondary diagonals, as well as the 3 diagonals from the other side will be having values, other elements would be zero.
 
-### [Ques6-SP](./ques6-SP/):
+### [Ques3-SP](./ques3-SP/):
 Create a randomly generated maze with one entry and one exit. Find the path to escape the maze and print the output
 
 ### [Ques4-SP](./ques4-SP/):
