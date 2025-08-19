@@ -21,13 +21,6 @@ procedure SelectionSort(A[1..n], size, cmp)
     end for
 end procedure
 
-Time Complexity:
-- Best case: O(n^2)
-- Average case: O(n^2)
-- Worst case: O(n^2)
-
-Space Complexity:
-- O(1) (in-place sorting)
 Time Complexity: O(n^2) - Best, Average, Worst Case
 Space Complexity: O(1) - In-place sorting
 */
